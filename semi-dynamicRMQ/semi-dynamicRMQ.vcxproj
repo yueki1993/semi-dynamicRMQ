@@ -82,6 +82,7 @@
     <ClInclude Include="InBlock.h" />
     <ClInclude Include="misc.h" />
     <ClInclude Include="pm1RMQ.h" />
+    <ClInclude Include="RMQ.h" />
     <ClInclude Include="SparseTable.h" />
     <ClInclude Include="TableLookup.h" />
   </ItemGroup>
@@ -89,6 +90,7 @@
     <ClCompile Include="BitTableLookup.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pm1RMQ.cpp" />
+    <ClCompile Include="RMQ.cpp" />
     <ClCompile Include="SparseTable.cpp" />
     <ClCompile Include="TableLookup.cpp" />
   </ItemGroup>

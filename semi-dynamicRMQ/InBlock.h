@@ -21,7 +21,7 @@ public:
 	
 	int rmq(int i, int j)
 	{
-		return tl->rmq(i, j) + diff;
+		return tl->rmq(i, j);
 	}
 };
 

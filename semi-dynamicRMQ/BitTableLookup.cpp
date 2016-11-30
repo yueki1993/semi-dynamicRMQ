@@ -25,11 +25,22 @@ void BitTableLookup::init(uint  bit, int bitwidth)
 	int Ai = 0;
 	int Aj;
 	for (int i = 0; i < N; i++) {
-		TL[i][i] = Aj = Ai;
+		TL[i][i] = i;
+		Aj = Ai;
+		int minval = Aj;
+		int minpos = i;
 		for (int j = i + 1; j < N; j++) {
 			// update Aj
 			Aj += f(get_ith_bit(bit, j - 1));
-			TL[i][j] = min(TL[i][j - 1], Aj);
+			//TL[i][j] = (TL[i][j - 1], Aj);
+			if (minval <= Aj) {
+				TL[i][j] = minpos;
+			} else {
+				TL[i][j] = j;		
+				minval = Aj;
+				minpos = j;
+			}
+			
 		}
 		Ai += f(get_ith_bit(bit, i));
 	}

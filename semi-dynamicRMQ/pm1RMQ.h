@@ -20,13 +20,14 @@ public:
 		blocklen = ceil(std::log2(size) / 2);
 		blocknum = ceildiv(size, blocklen);
 		ST.resize(blocknum);
+		raw.resize(size);
 		InBlocks.resize(blocknum);
 		TLs.resize(pow2(blocklen - 1));
 		preprocessing();
 	};
 
 	void append(int x);
-	int rmq(int i, int j);
+	int rmq(int i, int j); //argmin, leftmost
 	~pm1RMQ();
 private:
 	void preprocessing(); 
@@ -38,5 +39,6 @@ private:
 	SparseTable ST;
 	std::vector<InBlock> InBlocks;
 	std::vector<BitTableLookup> TLs;	
+	std::vector<int> raw;
 };
 
