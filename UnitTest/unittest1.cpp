@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "SparseTable.h"
-#include "TableLookup.h"
-#include "InBlock.h"
 #include "BitTableLookup.h"
 #include "pm1RMQ.h"
 #include "RMQ.h"
