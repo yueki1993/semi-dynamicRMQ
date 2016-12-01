@@ -6,7 +6,6 @@ void RMQ::append(int x)
 	A[num] = x;
 	int current_node = E[e_size - 1];
 	while (A[current_node] >= x) {
-		//if (A[current_node] >= x) {
 		E[e_size++] = parents[current_node];
 		D.append(--current_depth);
 		current_node = parents[current_node];
@@ -29,6 +28,7 @@ void RMQ::append(int x)
 
 int RMQ::rmq(int i, int j)
 {
-	const int lca = D.rmq(B[i + 1], B[j + 1]);
-	return lca == B[i + 1] ? A[E[lca]] : A[E[lca] +1];
+	const int lca_pos = D.rmq(B[i + 1], B[j + 1]);
+	const int lca_label = E[lca_pos];
+	return lca_label == i + 1 ? lca_label - 1 : E[lca_pos + 1] - 1;
 }

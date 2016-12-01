@@ -143,7 +143,7 @@ namespace UnitTest
 			uniform_int_distribution<> rand(1, 1000);
 			uniform_int_distribution<> rand_bin(0, 1);
 
-			for (int num = 0; num < 1; num++) {
+			for (int num = 0; num < 1000; num++) {
 				int N = rand(mt);
 				pm1RMQ p(N);
 				SparseTable st(N);
@@ -199,8 +199,65 @@ namespace UnitTest
 			vector<int> X = { 4, 6, 5, 7, 3, 4, 5, 3 };
 			for (auto x : X)r.append(x);
 
-			Assert::AreEqual(5, r.rmq(1, 3));
+			Assert::AreEqual(2, r.rmq(1, 3));
+			Assert::AreEqual(0, r.rmq(0, 0));
+			Assert::AreEqual(3, r.rmq(3, 3));
+			Assert::AreEqual(7, r.rmq(7, 7));
+			Assert::AreEqual(4, r.rmq(4, 6));
+		}
 
+		TEST_METHOD(RMQ_rightmost)
+		{
+			RMQ r(8);			
+			for (int i = 0; i < 8;i++)r.append(1);
+
+			Assert::AreEqual(3, r.rmq(1, 3));
+			Assert::AreEqual(6, r.rmq(4, 6));
+			Assert::AreEqual(7, r.rmq(7, 7));
+		}
+
+		TEST_METHOD(RMQ_static2)
+		{
+			//vector<int>v{ 8, 407, 555, 364, 302 };//, 538, 356, 559 };//;, 488, 380, 852, 948, 373 };
+			vector<int> v{ 0, 3, 4, 2, 1 };
+			SparseTable st(v.size());
+			RMQ r(v.size());
+			for (auto x : v)st.append(x), r.append(x);
+			Assert::AreEqual(st.rmq(0, st.rmq(0, v.size() - 1)),
+				r.rmq(0, v.size() - 1));
+
+
+		}
+
+		TEST_METHOD(RMQ_random)
+		{
+			mt19937 mt(0);
+			uniform_int_distribution<> rand(1, 1000);
+
+			for (int i = 0; i < 1000; i++) {
+				int n = rand(mt);
+				SparseTable st(n);
+				RMQ r(n);
+				vector<int> v;
+				for (int j = 0; j < n; j++) {
+					int a = rand(mt);
+					v.push_back(a);
+					st.append(a);
+					r.append(a);
+				}
+
+				uniform_int_distribution<> A(0, n - 1);
+				int a = A(mt);
+				int b = A(mt);
+				if (a>b)swap(a, b);
+				int aa = st.rmq(a, b);
+				int bb = r.rmq(a, b);
+				if (aa != bb) {
+					aa++;
+				}
+				Assert::AreEqual(st.rmq(a, b), r.rmq(a, b));
+
+			}
 		}
 	};
 }

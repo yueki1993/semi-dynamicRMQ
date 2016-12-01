@@ -18,7 +18,7 @@ public:
 #endif
 	};
 	void append(int x);
-	int rmq(int i, int j);
+	int rmq(int i, int j); // argmin, rightmost
 	~RMQ() {};
 
 	//for tests
@@ -36,12 +36,11 @@ private:
 	std::vector<int> parents; //parents of each nodes in the 2d-min-heap
 #ifdef _DEBUG
 	std::vector<int> D_; // for test only
-
 #endif
 	pm1RMQ D; // depths are maintained by the pm1 RMQ
 
-	int num = 1;
-	int e_size = 1; // |E|
+	int num = 1; // Since A[0] is initially set to -\infty, it begins size-1.
+	int e_size = 1; // current size of E
 	int current_depth = 0;
 };
 
