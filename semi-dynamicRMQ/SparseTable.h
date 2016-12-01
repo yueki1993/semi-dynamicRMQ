@@ -10,7 +10,7 @@ public:
 	SparseTable() {};
 	void append(int x);
 	void resize(int size);
-	int rmq(int i, int j); // argmin [A[i:j+1] (including i and j), leftmost
+	int rmq(int i, int j); // argmin [A[i:j+1] (including i and j), rightmost
 	~SparseTable() {};
 private:
 	std::vector<std::vector<int>> ST; // ST[size][width_size]

@@ -1,4 +1,6 @@
 #pragma once
+//unused class
+
 #include "BitTableLookup.h"
 
 class InBlock

@@ -17,10 +17,10 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTest
 {		
-	TEST_CLASS(UnitTest1)
+	TEST_CLASS(ST_TEST)
 	{
 	public:
-		
+
 		TEST_METHOD(ST)
 		{
 			SparseTable st(10);
@@ -47,7 +47,7 @@ namespace UnitTest
 			for (int i = 0; i < 10; i++) {
 				st.append(1);
 			}
-			Assert::AreEqual(0, st.rmq(0, 9));
+			Assert::AreEqual(9, st.rmq(0, 9));
 		}
 
 		TEST_METHOD(ST_random)
@@ -59,13 +59,13 @@ namespace UnitTest
 			for (int i = 0; i < 1000; i++) {
 				int n = rand(mt);
 				SparseTable st(n);
-				vector<int> v(n);				
-				for (int j = 0; j < n; j++) {					
-					v[j] = j;					
+				vector<int> v(n);
+				for (int j = 0; j < n; j++) {
+					v[j] = j;
 				}
 				random_shuffle(v.begin(), v.end());
 				for (int j = 0; j<n; j++)st.append(v[j]);
-				uniform_int_distribution<> A(0, n-1);
+				uniform_int_distribution<> A(0, n - 1);
 				int a = A(mt);
 				int b = A(mt);
 				if (a > b) swap(a, b);
@@ -76,87 +76,46 @@ namespace UnitTest
 					pos = ans == v[ii] ? ii : pos;
 				}
 				Assert::AreEqual(pos, st.rmq(a, b));
-				
-			}
-		}
 
-		TEST_METHOD(TL)
-		{			
-			vector<int> v;
-			for (int i = 0; i < 10; i++) {
-				v.push_back(i);
 			}
-			TableLookup tl(v);
-			Assert::AreEqual(0, tl.rmq(0, 9));
-			Assert::AreEqual(1, tl.rmq(1, 1));
 		}
+	};
 
-		TEST_METHOD(TL_random)
-		{
-			mt19937 mt(0);
-			uniform_int_distribution<> rand(1, 1000);
-			for (int i = 0; i < 100; i++) {
-				int n = rand(mt);
-				vector<int> v(n);
-				for (int j = 0; j < n; j++) {
-					int a = rand(mt);
-					v[j] = a;
-				}
-				uniform_int_distribution<> A(0, n - 1);
-				int a = A(mt);
-				int b = A(mt);
-				if (a > b) swap(a, b);
-				int ans = 1 << 20;
-				int pos = 0;
-				for (int ii = a; ii <= b; ii++) {
-					ans = min(ans, v[ii]); pos = ans == v[ii] ? ii : pos;
-				}
-			
-				TableLookup tl(v);
-				Assert::AreEqual(v[ans], tl.rmq(a, b));
-			}
-		}
-		
+	TEST_CLASS(BIT_TL_TEST)
+	{
+	public:
 		TEST_METHOD(BIT_TL)
 		{
-			do{
-				BitTableLookup tl(0u, 3); // == {0, -1, -2, -3}				
-				Assert::AreEqual(3, tl.rmq(0, 3));
-				Assert::AreEqual(2, tl.rmq(0, 2));
-				Assert::AreEqual(1, tl.rmq(0, 1));
-				Assert::AreEqual(0, tl.rmq(0, 0));
-			} while (0);
-			
-			
-			do{ 
-				BitTableLookup tl(1u, 3); // == {0, 1, 0, -1}
-				Assert::AreEqual(3, tl.rmq(0, 3));
-				Assert::AreEqual(0, tl.rmq(0, 2));
-				Assert::AreEqual(2, tl.rmq(2, 2));
-				Assert::AreEqual(0, tl.rmq(0, 1));
-				Assert::AreEqual(0, tl.rmq(0, 0));
-			} while (0);
-			
-			
-			do {
-				BitTableLookup tl(18u, 5); //0b10010 == {0, -1, 0, -1, -2, -1}
-				Assert::AreEqual(4, tl.rmq(0, 5));
-				Assert::AreEqual(1, tl.rmq(0, 3));
-				Assert::AreEqual(1, tl.rmq(0, 2));
-				Assert::AreEqual(4, tl.rmq(3, 5));
-				Assert::AreEqual(4, tl.rmq(4, 5));
-				Assert::AreEqual(4, tl.rmq(1, 4));
-			} while (0);
+
+			BitTableLookup tl(0u, 3); // == {0, -1, -2, -3}				
+			Assert::AreEqual(3, tl.rmq(0, 3));
+			Assert::AreEqual(2, tl.rmq(0, 2));
+			Assert::AreEqual(1, tl.rmq(0, 1));
+			Assert::AreEqual(0, tl.rmq(0, 0));
+
 		}
 		TEST_METHOD(BIT_TL2)
 		{
 
-			
-		}
+			BitTableLookup tl(18u, 5); //0b10010 == {0, -1, 0, -1, -2, -1}
+			Assert::AreEqual(4, tl.rmq(0, 5));
+			Assert::AreEqual(3, tl.rmq(0, 3));
+			Assert::AreEqual(1, tl.rmq(0, 2));
+			Assert::AreEqual(4, tl.rmq(3, 5));
+			Assert::AreEqual(4, tl.rmq(4, 5));
+			Assert::AreEqual(4, tl.rmq(1, 4));
 
+
+		}
+	};
+
+
+	TEST_CLASS(pm1RMQ_TEST)
+	{
+	public:
 		TEST_METHOD(pm1)
 		{
-			pm1RMQ p(10);			
+			pm1RMQ p(10);
 			for (int i = 0; i < 10; i++) {
 				p.append(i);
 			}
@@ -173,7 +132,7 @@ namespace UnitTest
 			for (int i = 0; i < 4; i++) {
 				p.append(v[i]);
 			}
-			Assert::AreEqual(0, p.rmq(0, 3));
+			Assert::AreEqual(2, p.rmq(0, 3));
 			Assert::AreEqual(1, p.rmq(1, 1));
 
 		}
@@ -192,7 +151,7 @@ namespace UnitTest
 				p.append(val);
 				st.append(val);
 				Assert::AreEqual(st.rmq(0, 0), p.rmq(0, 0));
-				
+
 				for (int i = 1; i < N; i++) {
 					val += rand_bin(mt) == 0 ? -1 : 1;
 					p.append(val);
@@ -206,6 +165,11 @@ namespace UnitTest
 				}
 			}
 		}
+	};
+
+	TEST_CLASS(RMQ_TEST)
+	{
+	public:
 
 		TEST_METHOD(RMQ_Euler_tour)
 		{
@@ -238,8 +202,5 @@ namespace UnitTest
 			Assert::AreEqual(5, r.rmq(1, 3));
 
 		}
-
-
-
 	};
 }
