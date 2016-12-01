@@ -2,12 +2,14 @@
 
 #include <vector>
 #include <climits>
+
 #include "pm1RMQ.h"
 
 class RMQ
 {
 public:
-	RMQ(int size) :A(size + 1), B(size + 1), E(2 * size), D(2 * size), parents(size + 1) {
+	RMQ(int size) :A(size + 1), B(size + 1), E(2 * size), D(2 * size), parents(size + 1)
+	{
 		A[0] = INT_MIN;
 		parents[0] = -1;
 		E[0] = 0;
@@ -23,9 +25,9 @@ public:
 
 	//for tests
 #ifdef _DEBUG
-	std::vector<int> getB() { return B; } 
-	std::vector<int> getE() { return E; } 
-	std:: vector<int> getD() { return D_; }
+	std::vector<int> getB() { return B; }
+	std::vector<int> getE() { return E; }
+	std::vector<int> getD() { return D_; }
 #endif
 
 

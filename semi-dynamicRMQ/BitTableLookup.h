@@ -11,7 +11,7 @@ public:
 	BitTableLookup() {};
 	void init(uint32_t bit, int bitwidth);
 	int rmq(int i, int j) { return TL[i][j]; }; // argmin, rightmost
-	
+
 	~BitTableLookup() {};
 };
 

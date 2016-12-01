@@ -79,12 +79,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BitTableLookup.h" />
-    <ClInclude Include="InBlock.h" />
     <ClInclude Include="misc.h" />
     <ClInclude Include="pm1RMQ.h" />
     <ClInclude Include="RMQ.h" />
     <ClInclude Include="SparseTable.h" />
-    <ClInclude Include="TableLookup.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BitTableLookup.cpp" />
@@ -92,7 +90,6 @@
     <ClCompile Include="pm1RMQ.cpp" />
     <ClCompile Include="RMQ.cpp" />
     <ClCompile Include="SparseTable.cpp" />
-    <ClCompile Include="TableLookup.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

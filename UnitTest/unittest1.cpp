@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "SparseTable.h"
-#include "TableLookup.h"
-#include "InBlock.h"
 #include "BitTableLookup.h"
 #include "pm1RMQ.h"
 #include "RMQ.h"
@@ -16,12 +14,11 @@ using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTest
-{		
+{
 	TEST_CLASS(ST_TEST)
 	{
 	public:
-
-		TEST_METHOD(ST)
+		TEST_METHOD(TEST1)
 		{
 			SparseTable st(10);
 			for (int i = 0; i < 10; i++) {
@@ -30,7 +27,7 @@ namespace UnitTest
 			Assert::AreEqual(0, st.rmq(0, 9));
 			Assert::AreEqual(1, st.rmq(1, 1));
 		}
-		TEST_METHOD(ST2)
+		TEST_METHOD(TEST2)
 		{
 			SparseTable st;
 			st.resize(10);
@@ -40,7 +37,7 @@ namespace UnitTest
 			Assert::AreEqual(0, st.rmq(0, 9));
 			Assert::AreEqual(1, st.rmq(1, 1));
 		}
-		TEST_METHOD(ST3)
+		TEST_METHOD(TEST3)
 		{
 			SparseTable st;
 			st.resize(10);
@@ -50,7 +47,7 @@ namespace UnitTest
 			Assert::AreEqual(9, st.rmq(0, 9));
 		}
 
-		TEST_METHOD(ST_random)
+		TEST_METHOD(RANDOM)
 		{
 			mt19937 mt(0);
 			uniform_int_distribution<> rand(1, 1000);
@@ -76,7 +73,6 @@ namespace UnitTest
 					pos = ans == v[ii] ? ii : pos;
 				}
 				Assert::AreEqual(pos, st.rmq(a, b));
-
 			}
 		}
 	};
@@ -84,19 +80,17 @@ namespace UnitTest
 	TEST_CLASS(BIT_TL_TEST)
 	{
 	public:
-		TEST_METHOD(BIT_TL)
+		TEST_METHOD(TEST1)
 		{
-
-			BitTableLookup tl(0u, 3); // == {0, -1, -2, -3}				
+			BitTableLookup tl(0u, 3); // 0b000 == {0, -1, -2, -3}				
 			Assert::AreEqual(3, tl.rmq(0, 3));
 			Assert::AreEqual(2, tl.rmq(0, 2));
 			Assert::AreEqual(1, tl.rmq(0, 1));
 			Assert::AreEqual(0, tl.rmq(0, 0));
 
 		}
-		TEST_METHOD(BIT_TL2)
+		TEST_METHOD(TEST2)
 		{
-
 			BitTableLookup tl(18u, 5); //0b10010 == {0, -1, 0, -1, -2, -1}
 			Assert::AreEqual(4, tl.rmq(0, 5));
 			Assert::AreEqual(3, tl.rmq(0, 3));
@@ -104,16 +98,13 @@ namespace UnitTest
 			Assert::AreEqual(4, tl.rmq(3, 5));
 			Assert::AreEqual(4, tl.rmq(4, 5));
 			Assert::AreEqual(4, tl.rmq(1, 4));
-
-
 		}
 	};
-
 
 	TEST_CLASS(pm1RMQ_TEST)
 	{
 	public:
-		TEST_METHOD(pm1)
+		TEST_METHOD(TEST1)
 		{
 			pm1RMQ p(10);
 			for (int i = 0; i < 10; i++) {
@@ -125,7 +116,7 @@ namespace UnitTest
 				}
 			}
 		}
-		TEST_METHOD(pm1_2)
+		TEST_METHOD(TEST2)
 		{
 			pm1RMQ p(4);
 			vector<int> v = { 0, 1, 0, 1 };
@@ -137,7 +128,7 @@ namespace UnitTest
 
 		}
 
-		TEST_METHOD(pm1_rand)
+		TEST_METHOD(RANDOM)
 		{
 			mt19937 mt(0);
 			uniform_int_distribution<> rand(1, 1000);
@@ -170,13 +161,12 @@ namespace UnitTest
 	TEST_CLASS(RMQ_TEST)
 	{
 	public:
-
-		TEST_METHOD(RMQ_Euler_tour)
+		TEST_METHOD(EULER_TOUR)
 		{
 			RMQ rmq(8);
 			vector<int> X = { 4, 6, 5, 7, 3, 4, 5, 3 };
 			for (auto x : X)rmq.append(x);
-			
+
 			vector<int> E = { 0, 1, 2, 1, 3, 4, 3, 1, 0, 5, 6, 7, 6, 5, 0, 8 };
 			vector<int> D = { 0, 1, 2, 1, 2, 3, 2, 1, 0, 1, 2, 3, 2, 1, 0, 1 };
 
@@ -193,7 +183,7 @@ namespace UnitTest
 			}
 		}
 
-		TEST_METHOD(RMQ_static)
+		TEST_METHOD(TEST1)
 		{
 			RMQ r(8);
 			vector<int> X = { 4, 6, 5, 7, 3, 4, 5, 3 };
@@ -206,30 +196,27 @@ namespace UnitTest
 			Assert::AreEqual(4, r.rmq(4, 6));
 		}
 
-		TEST_METHOD(RMQ_rightmost)
+		TEST_METHOD(RIGHTMOST)
 		{
-			RMQ r(8);			
-			for (int i = 0; i < 8;i++)r.append(1);
+			RMQ r(8);
+			for (int i = 0; i < 8; i++)r.append(1);
 
 			Assert::AreEqual(3, r.rmq(1, 3));
 			Assert::AreEqual(6, r.rmq(4, 6));
 			Assert::AreEqual(7, r.rmq(7, 7));
 		}
 
-		TEST_METHOD(RMQ_static2)
+		TEST_METHOD(TEST2)
 		{
-			//vector<int>v{ 8, 407, 555, 364, 302 };//, 538, 356, 559 };//;, 488, 380, 852, 948, 373 };
 			vector<int> v{ 0, 3, 4, 2, 1 };
 			SparseTable st(v.size());
 			RMQ r(v.size());
 			for (auto x : v)st.append(x), r.append(x);
 			Assert::AreEqual(st.rmq(0, st.rmq(0, v.size() - 1)),
 				r.rmq(0, v.size() - 1));
-
-
 		}
 
-		TEST_METHOD(RMQ_random)
+		TEST_METHOD(RANDOM)
 		{
 			mt19937 mt(0);
 			uniform_int_distribution<> rand(1, 1000);
@@ -238,10 +225,8 @@ namespace UnitTest
 				int n = rand(mt);
 				SparseTable st(n);
 				RMQ r(n);
-				vector<int> v;
 				for (int j = 0; j < n; j++) {
 					int a = rand(mt);
-					v.push_back(a);
 					st.append(a);
 					r.append(a);
 				}
@@ -249,14 +234,8 @@ namespace UnitTest
 				uniform_int_distribution<> A(0, n - 1);
 				int a = A(mt);
 				int b = A(mt);
-				if (a>b)swap(a, b);
-				int aa = st.rmq(a, b);
-				int bb = r.rmq(a, b);
-				if (aa != bb) {
-					aa++;
-				}
+				if (a > b)swap(a, b);
 				Assert::AreEqual(st.rmq(a, b), r.rmq(a, b));
-
 			}
 		}
 	};

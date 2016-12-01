@@ -1,11 +1,10 @@
 #pragma once
 #include <cmath>
 #include <vector>
+#include <cstdint>
 
 #include "SparseTable.h"
-//#include "InBlock.h"
 #include "BitTableLookup.h"
-#include <cstdint>
 
 #include "misc.h"
 
@@ -29,9 +28,9 @@ public:
 
 	void append(int x);
 	int rmq(int i, int j); //argmin, leftmost
-	~pm1RMQ();
+	~pm1RMQ() {};
 private:
-	void preprocessing(); 
+	void preprocessing();
 	int lastval;
 	uint32_t current_bit;
 	int num = 0;
@@ -41,8 +40,7 @@ private:
 	std::vector<int> ST_pos;
 	int stpos_num = 0;
 	std::vector<BitTableLookup*> InBlocks;
-	std::vector<BitTableLookup> TLs;	
+	std::vector<BitTableLookup> TLs;
 	std::vector<int> raw;
-	int get_blocknum_offcet(int b) { return b * blocklen; }
 };
 
