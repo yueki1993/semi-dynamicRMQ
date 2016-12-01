@@ -36,8 +36,8 @@ inline int floor_log2(int x)
 
 inline int ceildiv(int a, int b)
 {
-	//return  ceil(a/b)
-	return a % b == 0 ? a / b : ceil((a+0.1) / b);
+	//return  ceil(a/b), a!=0
+	return 1 + ((a - 1) / b);
 }
 
 inline int pow2(int x)
