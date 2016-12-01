@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "SparseTable.h"
-#include "InBlock.h"
+//#include "InBlock.h"
 #include "BitTableLookup.h"
 #include <cstdint>
 
@@ -20,13 +20,15 @@ public:
 		blocklen = ceil(std::log2(size) / 2);
 		blocknum = ceildiv(size, blocklen);
 		ST.resize(blocknum);
+		ST_pos.resize(blocknum);
+		raw.resize(size);
 		InBlocks.resize(blocknum);
 		TLs.resize(pow2(blocklen - 1));
 		preprocessing();
 	};
 
 	void append(int x);
-	int rmq(int i, int j);
+	int rmq(int i, int j); //argmin, leftmost
 	~pm1RMQ();
 private:
 	void preprocessing(); 
@@ -36,7 +38,11 @@ private:
 	int blocklen; //block length
 	int blocknum; // size/blocklen
 	SparseTable ST;
-	std::vector<InBlock> InBlocks;
+	std::vector<int> ST_pos;
+	int stpos_num = 0;
+	std::vector<BitTableLookup*> InBlocks;
 	std::vector<BitTableLookup> TLs;	
+	std::vector<int> raw;
+	int get_blocknum_offcet(int b) { return b * blocklen; }
 };
 
