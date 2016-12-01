@@ -36,11 +36,11 @@ void BitTableLookup::init(uint  bit, int bitwidth)
 			if (minval < Aj) {
 				TL[i][j] = minpos;
 			} else {
-				TL[i][j] = j;		
+				TL[i][j] = j;
 				minval = Aj;
 				minpos = j;
 			}
-			
+
 		}
 		Ai += f(get_ith_bit(bit, i));
 	}

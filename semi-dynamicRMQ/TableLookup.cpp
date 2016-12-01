@@ -1,3 +1,4 @@
+//unused class
 #include "TableLookup.h"
 #include <vector>
 #include <algorithm>
