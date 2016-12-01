@@ -4,7 +4,7 @@ The semi-dynamic range minimum query algorithm that maintains an array A and sup
 - `append(x)`:   
 append x to the end of A in amortized constant time.  
 - `rmq(i, j)`:  
-return the (rightmost) **position** of the minimum value in the array A in constant time.
+return the (rightmost) **position** of the minimum value in the subarray A[i], ..., A[j] in constant time.
 
 ## Example
     #include "RMQ.h"
