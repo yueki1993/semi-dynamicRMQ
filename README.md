@@ -11,7 +11,7 @@ return the (rightmost) **position** of the minimum value in the subarray A[i], .
 
     [...]
         {
-            RMQ r(8);
+            RMQ r(8); // number of elements to be appended.
             vector<int> X = { 4, 6, 5, 7, 3, 4, 5, 3 };
             for (auto x : X) r.append(x);
 
@@ -35,6 +35,9 @@ Unittest. To run this code, Microsoft Visual Studio is required.
 ## Remark
 To compile with gcc or clang,
 the C++11 option `-std=c++11` is required.  
+I have not yet implemented the semi-dynamic RMQ algorithm which 
+increases the array size exponentially, i.e., 
+the number of elements to be appended is required beforehand in order to achieve the amortized constant time complexity. 
 
 
 ## References
