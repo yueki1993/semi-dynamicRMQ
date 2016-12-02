@@ -23,18 +23,18 @@ return the (rightmost) **position** of the minimum value in the subarray A[i], .
 ## Implementations
 - semi-dynamicRMQ/RMQ.*  
 The proposed algorithm in [2].
-- semi-dynamicRMQ/pm1RMQ  
+- semi-dynamicRMQ/pm1RMQ.*  
 The ±1RMQ algorithm in [1] based on the sparse table algorithm and table lookup algorithm.
 - semi-dynamicRMQ/SparseTable.*  
 The sparse table algorithm proposed in [1].
-- semi-dynamicRMQ/BitTableLookup.*
+- semi-dynamicRMQ/BitTableLookup.*  
 The table lookup algorithm proposed in [1] using some bitwise operations.
 - UnitTest/unittest1.cpp  
 Unittest. To run this code, Microsoft Visual Studio is required.
 
 ## Remark
-Although I did not confirm that these implementations can be compiled with gcc or clang,
-but I suppose that these can be compiled with C++11 option `-std=c++11`.  
+To compile with gcc or clang,
+the C++11 option `-std=c++11` is required.  
 
 
 ## References

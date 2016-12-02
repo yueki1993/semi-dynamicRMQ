@@ -18,7 +18,7 @@ BitTableLookup::BitTableLookup(uint  bit, int bitwidth)
 
 void BitTableLookup::init(uint  bit, int bitwidth)
 {
-	// 0b110 <=> [0, -1, 0, 1] (LSB represents A[1] - A[0])
+	// 0b110 <=> [0, -1, 0, 1] (The LSB represents A[1] - A[0])
 	const int N = bitwidth + 1;
 	TL.resize(N, vector<int>(N));
 

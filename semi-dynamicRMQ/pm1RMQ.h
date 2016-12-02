@@ -27,7 +27,7 @@ public:
 	};
 
 	void append(int x);
-	int rmq(int i, int j); //argmin, leftmost
+	int rmq(int i, int j); //argmin, rightmost 
 	~pm1RMQ() {};
 private:
 	void preprocessing();
