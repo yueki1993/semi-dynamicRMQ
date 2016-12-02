@@ -33,7 +33,7 @@ The table lookup algorithm proposed in [1] using some bitwise operations.
 Unittest. To run this code, Microsoft Visual Studio is required.
 
 ## Remark
-To compile these implementations with gcc or clang,
+To compile with gcc or clang,
 the C++11 option `-std=c++11` is required.  
 
 
